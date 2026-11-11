@@ -62,12 +62,22 @@ function Login() {
           <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground shadow-soft">
             <PawPrint className="h-5 w-5 animate-wag" />
           </div>
-          <span className="font-display text-xl font-semibold">Clínica Patas & Cia</span>
+          <span className="truncate font-display text-lg font-semibold sm:text-xl">Clínica Patas & Cia</span>
         </header>
 
-        <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-12 animate-rise relative">
+        <div className="relative mt-6 h-48 overflow-hidden rounded-[2rem] shadow-soft md:hidden animate-rise">
+          <img src={hero} alt="Veterinária com um filhote e um gato" width={1024} height={1280} className="absolute inset-0 h-full w-full object-cover object-[50%_30%]" />
+          <div className="absolute inset-0 bg-overlay" />
+          <div className="animate-float absolute left-3 top-3 flex items-center gap-2 rounded-xl bg-card/90 px-3 py-2 shadow-soft backdrop-blur">
+            <span className="text-lg">🐶</span>
+            <div className="text-xs"><p className="font-bold text-foreground">Thor · V10</p><p className="text-muted-foreground">Hoje, 14:30</p></div>
+          </div>
+          <p className="absolute bottom-3 left-4 right-4 font-display text-xl font-semibold text-primary-foreground">Cuidar de quem cuida dos pets. 💚</p>
+        </div>
+
+        <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-8 md:py-12 animate-rise relative">
           <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-peach px-3 py-1 text-sm font-bold text-accent-foreground"><span className="animate-wag">🐾</span> {greeting()}, equipe!</span>
-          <h1 className="text-4xl font-semibold sm:text-5xl">Entre na sua clínica</h1>
+          <h1 className="text-3xl font-semibold sm:text-5xl">Entre na sua clínica</h1>
           <p className="mt-3 text-muted-foreground">Cada patinha bem cuidada começa aqui. Agenda, tutores e pacientes em um só lugar.</p>
 
           <form onSubmit={onSubmit} className="mt-10 space-y-5" noValidate>
@@ -97,7 +107,7 @@ function Login() {
             {error && (
               <p role="alert" className="rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive">{error}</p>
             )}
-            <button type="submit" disabled={loading} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary font-medium text-primary-foreground shadow-soft transition hover:bg-primary/90 active:scale-[0.99] disabled:opacity-70">
+            <button type="submit" disabled={loading} className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary text-base md:h-12 font-medium text-primary-foreground shadow-soft transition hover:bg-primary/90 active:scale-[0.99] disabled:opacity-70">
               {loading && <Loader2 className="h-4 w-4 animate-spin" />}
               {loading ? "Entrando..." : "Entrar"}
             </button>
@@ -113,7 +123,7 @@ function Login() {
           <p className="mt-4 text-center text-xs text-muted-foreground">Acesso exclusivo à equipe da clínica.</p>
         </main>
 
-        <footer className="relative flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+        <footer className="relative flex flex-col items-center gap-2 sm:flex-row sm:justify-between text-xs text-muted-foreground">
           <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-success" /> Sistema online</span>
           <span className="flex items-center gap-1.5"><Phone className="h-3 w-3" /> Suporte (11) 0000-0000 · v1.0</span>
         </footer>
