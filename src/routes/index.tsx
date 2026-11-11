@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { PawPrint, Mail, Lock, Eye, EyeOff, Loader2, CalendarDays, Stethoscope, Syringe, Phone } from "lucide-react";
+import { PawPrint, Mail, Lock, Eye, EyeOff, Loader2, CalendarDays, Stethoscope, Syringe, Phone, Heart, Bone } from "lucide-react";
 import hero from "@/assets/vet-hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -52,19 +52,23 @@ function Login() {
     "h-12 w-full rounded-xl border border-input bg-card pl-11 pr-4 text-foreground placeholder:text-muted-foreground/70 outline-none transition focus:border-ring focus:ring-4 focus:ring-ring/15";
 
   return (
-    <div className="grid min-h-screen bg-background lg:grid-cols-[1fr_1.1fr]">
-      <div className="flex flex-col px-6 py-8 sm:px-12 lg:px-16">
-        <header className="flex items-center gap-3">
+    <div className="grid min-h-screen bg-background md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1.1fr]">
+      <div className="paw-pattern relative flex flex-col overflow-hidden px-6 py-8 sm:px-12 lg:px-16">
+        <div aria-hidden className="blob pointer-events-none absolute -left-24 -top-24 h-72 w-72 bg-peach/60" />
+        <div aria-hidden className="blob pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 bg-mint/70" />
+        <Bone aria-hidden className="animate-float pointer-events-none absolute right-10 top-28 h-10 w-10 text-accent/40" />
+        <Heart aria-hidden className="animate-float-slow pointer-events-none absolute bottom-32 left-8 h-8 w-8 fill-accent/20 text-accent/40" />
+        <header className="relative flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground shadow-soft">
-            <PawPrint className="h-5 w-5" />
+            <PawPrint className="h-5 w-5 animate-wag" />
           </div>
           <span className="font-display text-xl font-semibold">Clínica Patas & Cia</span>
         </header>
 
-        <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-12 animate-rise">
-          <p className="mb-2 text-sm font-medium text-accent">{greeting()}, equipe! 🐾</p>
+        <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-12 animate-rise relative">
+          <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-peach px-3 py-1 text-sm font-bold text-accent-foreground"><span className="animate-wag">🐾</span> {greeting()}, equipe!</span>
           <h1 className="text-4xl font-semibold sm:text-5xl">Entre na sua clínica</h1>
-          <p className="mt-3 text-muted-foreground">Agenda, tutores e pacientes em um só lugar.</p>
+          <p className="mt-3 text-muted-foreground">Cada patinha bem cuidada começa aqui. Agenda, tutores e pacientes em um só lugar.</p>
 
           <form onSubmit={onSubmit} className="mt-10 space-y-5" noValidate>
             <div>
@@ -98,20 +102,35 @@ function Login() {
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
-          <p className="mt-6 text-center text-sm text-muted-foreground">Acesso exclusivo à equipe da clínica.</p>
+          <div className="mt-8 flex items-center justify-center gap-3 rounded-2xl border border-border bg-card/70 p-3 backdrop-blur">
+            <div className="flex -space-x-2 text-lg">
+              {["🐶", "🐱", "🐰", "🐦"].map((e) => (
+                <span key={e} className="grid h-8 w-8 place-items-center rounded-full border-2 border-card bg-mint">{e}</span>
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground"><b className="text-foreground">+1.200 pets</b> cuidados por aqui</p>
+          </div>
+          <p className="mt-4 text-center text-xs text-muted-foreground">Acesso exclusivo à equipe da clínica.</p>
         </main>
 
-        <footer className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+        <footer className="relative flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
           <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-success" /> Sistema online</span>
           <span className="flex items-center gap-1.5"><Phone className="h-3 w-3" /> Suporte (11) 0000-0000 · v1.0</span>
         </footer>
       </div>
 
-      <aside className="relative m-4 hidden overflow-hidden rounded-3xl lg:block">
+      <aside className="relative m-4 hidden overflow-hidden rounded-[2.5rem] md:block">
         <img src={hero} alt="Veterinária sorrindo com um filhote e um gato" width={1024} height={1280} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-overlay" />
-        <div className="absolute inset-x-0 bottom-0 p-12 text-primary-foreground">
-          <h2 className="max-w-md text-4xl font-semibold leading-tight">Cuidar de quem cuida dos pets.</h2>
+        <div className="animate-float absolute left-8 top-8 flex items-center gap-3 rounded-2xl bg-card/90 p-3 pr-5 shadow-soft backdrop-blur">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-peach text-xl">🐶</span>
+          <div className="text-sm"><p className="font-bold text-foreground">Thor · Vacina V10</p><p className="text-muted-foreground">Hoje, 14:30</p></div>
+        </div>
+        <div className="animate-float-slow absolute right-8 top-1/3 flex items-center gap-2 rounded-full bg-card/90 px-4 py-2 text-sm font-bold text-foreground shadow-soft backdrop-blur">
+          <Heart className="h-4 w-4 fill-accent text-accent" /> Mia recebeu alta!
+        </div>
+        <div className="absolute inset-x-0 bottom-0 p-8 lg:p-12 text-primary-foreground">
+          <h2 className="max-w-md text-3xl lg:text-4xl font-semibold leading-tight">Cuidar de quem cuida dos pets. 💚</h2>
           <div className="mt-6 flex flex-wrap gap-2">
             {features.map(({ icon: Icon, label }) => (
               <span key={label} className="flex items-center gap-2 rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-4 py-2 text-sm backdrop-blur-md">
